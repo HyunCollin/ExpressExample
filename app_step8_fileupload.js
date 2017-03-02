@@ -57,10 +57,6 @@ var router = express.Router();
 router.route('/process/photo').post(upload.array('photo', 2), function (req, res, next) {
 	try {
 		var files = req.files;
-	
-        console.dir('#===== 업로드된 첫번째 파일 정보 =====#')
-        console.dir(req.files[0]);
-        console.dir('#=====#')
         
 		var originalname = '',
 			filename = '',
@@ -69,7 +65,7 @@ router.route('/process/photo').post(upload.array('photo', 2), function (req, res
         
 		res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
 		
-		if (Array.isArray(files)) {   // 배열에 들어가 있는 경우 (설정에서 1개의 파일도 배열에 넣게 했음)
+		if (Array.isArray(files)) {
 	        console.log("배열에 들어있는 파일 갯수 : %d", files.length);
 	        
 	        if(files.length > 0){
@@ -91,10 +87,8 @@ router.route('/process/photo').post(upload.array('photo', 2), function (req, res
 	        	res.write('<h3>업로드할 파일이 없습니다.</h3>');
 		        res.write('<hr/>');
 	        }
-	    } else {
-	    	res.write('<h3>파일 업로드 실패</h3>');
-	        res.write('<hr/>');
 	    }
+		
 		res.end();
 		
 	} catch(err) {
